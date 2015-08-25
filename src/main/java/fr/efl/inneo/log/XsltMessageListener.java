@@ -2,8 +2,8 @@ package fr.efl.inneo.log;
 
 import javax.xml.transform.SourceLocator;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.sf.saxon.s9api.Axis;
 import net.sf.saxon.s9api.MessageListener;
@@ -30,16 +30,16 @@ public class XsltMessageListener implements MessageListener {
 		} else {
 			String level = xdmMessage.getAttributeValue(new QName("level"));
 			String source = xdmMessage.getAttributeValue(new QName("source"));
-			Logger log = LogManager.getLogger(source);
+			Logger logger = LoggerFactory.getLogger(source);
 			switch (level) {
 			case "info":
-				log.info(textMessage);
+				logger.info(textMessage);
 				break;
 			case "warn":
-				log.warn(textMessage);
+				logger.warn(textMessage);
 				break;
 			case "error":
-				log.error(textMessage);
+				logger.error(textMessage);
 				break;			
 			default:
 				break;
